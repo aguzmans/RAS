@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+
+{% block maincontenttitle%}
+    <h1>Workers list in the database for retirement</h1>
+{% endblock %}
+{% block maincontentdata %}
+  {% if deleted is defined%}
+    <div>{{ deleted }}</div>
+  {% endif %}
+{% endblock %}

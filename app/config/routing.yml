@@ -1,0 +1,4 @@
+osd_retire:
+    resource: "@OsdRetireBundle/Resources/config/routing.yml"
+    prefix:   /
+

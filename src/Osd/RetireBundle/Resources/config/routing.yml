@@ -1,0 +1,31 @@
+osd_retire_newworkerpage:
+    path:  /new-worker
+    defaults: { _controller: OsdRetireBundle:New:index }
+  
+osd_retire_searchpage:
+    path:  /search
+    defaults: { _controller: OsdRetireBundle:Search:index }
+    
+osd_retire_editworkerpage:
+    path:  /edit-worker/{id}
+    defaults: { _controller: OsdRetireBundle:Edit:index }
+
+osd_retire_editpersistpage:
+    path:  /edit-persist-worker/{id}
+    defaults: { _controller: OsdRetireBundle:Edit:persist }
+
+osd_retire_deleteworkerpage:
+    path:  /delete-worker/{id}
+    defaults: { _controller: OsdRetireBundle:Delete:index }
+
+osd_retire_generalpage:
+    path:  /
+    defaults: { _controller: OsdRetireBundle:General:index }
+    
+osd_retire_emailing:
+    path:  /emails
+    defaults: { _controller: OsdRetireBundle:Emails:index }
+
+osd_retire_about:
+    path:  /about
+    defaults: { _controller: OsdRetireBundle:About:index }    

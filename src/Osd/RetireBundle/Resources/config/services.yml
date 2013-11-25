@@ -1,0 +1,7 @@
+parameters:
+#    osd_retire.example.class: Osd\RetireBundle\Example
+
+services:
+#    osd_retire.example:
+#        class: %osd_retire.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

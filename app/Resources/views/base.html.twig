@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% stylesheets 
+            '@OsdRetireBundle/Resources/public/css/main.css' 
+        %}
+            <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+        {% endstylesheets %}
+    </head>
+    <body>
+        <div>
+            <div id="body">
+                {% block body %}{% endblock %}
+            </div>
+            <div id="javascript">
+                {% block javascripts %}{% endblock %}
+            </div>   
+            <div id="separator"></div>
+            <div  id="nav" class="content-box">
+                {% block header%}                
+                     <div>
+                            <div id="site-title">
+                                <h1>
+                                    <a href="{{path('osd_retire_generalpage')}}">
+                                        Retirement Advisory System (RAS)
+                                    </a>
+                                </h1>
+                            </div>
+                        {% block mainmenu%}
+                            <div id="menu-bar">            
+                                {% block menubar %}
+                                    <a href="{{path('osd_retire_generalpage')}}">Dashboard</a> |
+                                    <a href="{{path('osd_retire_searchpage')}}">Search</a> | 
+                                    <a href="{{path('osd_retire_newworkerpage')}}">New</a> |
+                                    <a href="{{path('osd_retire_about')}}">About</a>
+                                {% endblock %}
+                            </div>
+                        {% endblock %}
+
+                    </div> 
+                {% endblock %}
+            </div>  
+            <div id="separator"></div>
+            <div id="main-content" class="content-box">
+                <div class="data-background">
+                    <div id="main-conten-ttitle">
+                        {% block maincontenttitle%}
+                        {% endblock %}
+                    </div>
+                    <div>
+                        {% block maincontentdata %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div> 
+            <div id="separator"></div>
+            <div id="footer" class="content-box">
+                {% block footer %}
+                    <a href="{{path('osd_retire_about')}}">
+                        This software was created by Abel Guzman Sanchez and it is distributed under MIT Licence.</a>
+                {% endblock %}
+            </div>                    
+        </div>
+    </body>
+</html>

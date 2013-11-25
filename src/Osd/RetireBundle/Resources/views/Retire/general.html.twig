@@ -1,0 +1,38 @@
+{% extends '::base.html.twig' %}
+
+{% block maincontenttitle%}
+    <h1>Genaral indicators for worker in retirement database</h1>
+{% endblock %}
+    
+{% block maincontentdata %}
+    <table>
+        <tr>
+            <th>Issue</th>
+            <th>Result</th>
+        </tr>
+        <tr>
+            <td>Total of workers in the database: </td>
+            <td>{{totalWorkers}}</td>
+        </tr>        
+        <tr>
+            <td>Workers with age to be retired: </td>
+            <td>{{moreThan60}}</td>
+        </tr>
+        <tr>
+            <td>Workers that are currently retired: </td>
+            <td>{{totalRetired}}</td>
+        </tr>         
+        <tr>
+            <td>Workers that are more than 59 and less than 60 years old: </td>
+            <td>{{lessThanOneYear}}</td>
+        </tr>
+        <tr>
+            <td>Workers that are more than 59 and 5 months and less than 60 years old: </td>
+            <td>{{lessThan7Months}}</td>            
+        </tr>
+        <tr>
+            <td>Total of workers with less than 59 years old: </td>
+            <td>{{totalWithLessThan59Years}}</td>          
+        </tr>
+    </table>
+{% endblock %}

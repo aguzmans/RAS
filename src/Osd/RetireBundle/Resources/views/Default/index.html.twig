@@ -1,0 +1,124 @@
+{% extends '::base.html.twig' %}
+
+{% block maincontenttitle%}
+    <h1>Search workers in the retirement database</h1>
+{% endblock %}
+{% block maincontentdata %}
+    {% if searchWorkerForm is defined %}
+    <div id="search-box">
+    <fieldset><legend>Select the search criteria</legend>
+        {% block form_row %}
+            {% spaceless %}
+        <form action="{{ path('osd_retire_searchpage') }}" method="post" 
+            {{ form_enctype(searchWorkerForm) }} >
+            {{ form_row (searchWorkerForm._token) }}
+                <div id="omang-label">
+                    {{ form_label(searchWorkerForm.omang) }}            
+                    {{ form_errors(searchWorkerForm.omang) }}
+                    {{ form_widget(searchWorkerForm.omang) }}
+                </div>
+            {% if searchWorkerForm.workerTitle is defined %}
+                <div id="title-worker">
+                    {{ form_label(searchWorkerForm.workerTitle) }}
+                    {{ form_errors(searchWorkerForm.workerTitle) }}
+                    {{ form_widget(searchWorkerForm.workerTitle) }}            
+                </div>     
+            {% endif %}
+            <div id="name-worker">
+                {{ form_label(searchWorkerForm.workerName) }}
+                {{ form_errors(searchWorkerForm.workerName) }}
+                {{ form_widget(searchWorkerForm.workerName) }}                    
+            </div>         
+            <div id="surname-worker">
+                {{ form_label(searchWorkerForm.workerSurname) }}
+                {{ form_errors(searchWorkerForm.workerSurname) }}
+                {{ form_widget(searchWorkerForm.workerSurname) }}            
+            </div>
+            <div id="Worker-status">
+                {{ form_label(searchWorkerForm.aIdWorkerStatus, 'Worker Status') }}
+                {{ form_errors(searchWorkerForm.aIdWorkerStatus) }}
+                <div id="status-worker">{{ form_widget(searchWorkerForm.aIdWorkerStatus) }}</div>                 
+            </div>      
+            <div id="birthday">
+                {{ form_label(searchWorkerForm.birthDay) }}
+                {{ form_errors(searchWorkerForm.birthDay) }}
+                    <div id="worker-birthDay">{{ form_widget(searchWorkerForm.birthDay) }}</div>
+            </div> 
+            <div id="Date-of-employment">
+                {{ form_label(searchWorkerForm.dateOfEmployment) }}
+                {{ form_errors(searchWorkerForm.dateOfEmployment) }}
+                    <div id="first-appointment">{{ form_widget(searchWorkerForm.dateOfEmployment) }}</div>
+            </div>
+            <div id="File-number">
+                {{ form_label(searchWorkerForm.fileNumber) }}
+                {{ form_errors(searchWorkerForm.fileNumber) }}
+                <div id="fine-number-field">{{ form_widget(searchWorkerForm.fileNumber) }}</div>                    
+            </div>                  
+            <div>
+            <div id="form-submit">
+                {{ form_widget(searchWorkerForm.search) }}
+            </div>                
+
+            </div>
+        </form>
+            {% endspaceless %}     
+        {% endblock form_row %}
+    </fieldset>
+    </div>            
+  {% endif %}
+  {% if aWorkerList is defined %} 
+
+    <fieldset><legend>Search results:</legend>
+    <div id="search-results"> 
+            <table>
+                <tr>
+                    <th>Action</th>
+                    <th>Omang</th>
+                    <th>Title</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Birth day</th>
+                    <th>First appointment</th>
+                    <th>Retirement date</th>
+                    <th>Time to retirement</th>
+                    <th>File Number</th>
+                    <th>Worker Status</th>
+                </tr>
+                {% for aWorker in aWorkerList %}
+                {% if aWorker.retireYear is defined %}
+                  {% if colorOrange > aWorker.yearsLeft %}
+                      <tr bgcolor="orange">
+                      {% if colorRed > aWorker.monthsLetf %}
+                            <tr bgcolor="red">                                
+                        {% elseif 0 > aWorker.yearsLeft %}
+                                    <tr bgcolor="red">                                    
+                      {% endif %}                  
+                      
+                  {% else %}
+                                 <tr bgcolor="Azure">           
+                                            {% endif %}
+                            <td><a href="{{path('osd_retire_editworkerpage', { 'id': aWorker.idWorker })}}">Edit</a> 
+                                <a href="{{path('osd_retire_deleteworkerpage', { 'id': aWorker.idWorker })}}" 
+                                   onclick="return confirm('Do you really want to delete this worker')">Delete</a></td> 
+                            <td>{{aWorker.omang}}</td>                        
+                            <td>{{aWorker.workerTitle}}</td>
+                            <td>{{aWorker.workerName}}</td>
+                            <td>{{aWorker.workerSurname}}</td>
+                            <td>{{aWorker.birthDay|date('Y-m-d')}}</td>
+                            <td>{{aWorker.dateOfEmployment|date('Y-m-d')}}</td>
+                            <td>{{aWorker.retireYear|date('Y-m-d')}}</td>
+                            <td>{{aWorker.timeToRetirement}}</td>
+                            <td>{{aWorker.fileNumber}}</td>
+                            <td>{{aWorker.aIdWorkerStatus.description}}</td>
+                        </tr>
+                {% endif %}
+                {% endfor %}
+            </table>
+    </div>             
+    </fieldset>
+           
+  {% endif %}
+  {% if persisted is defined%}
+    <div>{{ persisted }}</div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends '::base.html.twig' %}
+
+{% block maincontenttitle%}
+    <h1>Worker Edition</h1>
+{% endblock %}
+{% block maincontentdata %}
+    {% if searchWorkerForm is defined %}
+    <fieldset><legend>Select the period of time to show</legend>
+        {% block form_row %}
+            {% spaceless %}
+        <form action="{{ path('osd_retire_editpersistpage', { 'id': idToEdit }) }}" method="post" 
+            {{ form_enctype(searchWorkerForm) }} >
+            {{ form_row (searchWorkerForm._token) }}
+            <div id="omang">
+                {{ form_label(searchWorkerForm.omang) }}
+                {{ form_errors(searchWorkerForm.omang) }}
+                {{ form_widget(searchWorkerForm.omang) }}                    
+            </div>  
+            {% if searchWorkerForm.workerTitle is defined %}
+                <div id="title-worker">
+                    {{ form_label(searchWorkerForm.workerTitle) }}
+                    {{ form_errors(searchWorkerForm.workerTitle) }}
+                    <div id="worker-title">{{ form_widget(searchWorkerForm.workerTitle) }}</div>           
+                </div>     
+            {% endif %}
+            <div id="name-worker">
+                {{ form_label(searchWorkerForm.workerName) }}
+                {{ form_errors(searchWorkerForm.workerName) }}
+                {{ form_widget(searchWorkerForm.workerName) }}                    
+            </div>         
+            <div id="surname-worker">
+                {{ form_label(searchWorkerForm.workerSurname) }}
+                {{ form_errors(searchWorkerForm.workerSurname) }}
+                {{ form_widget(searchWorkerForm.workerSurname) }}            
+            </div>
+            <div id="Worker-status">
+                {{ form_label(searchWorkerForm.aIdWorkerStatus, 'Worker Status') }}
+                {{ form_errors(searchWorkerForm.aIdWorkerStatus) }}
+                <div id="status-worker">{{ form_widget(searchWorkerForm.aIdWorkerStatus) }}</div>                 
+            </div>      
+            <div id="birthday">
+                {{ form_label(searchWorkerForm.birthDay) }}
+                {{ form_errors(searchWorkerForm.birthDay) }}
+                    <div id="worker-birthDay">{{ form_widget(searchWorkerForm.birthDay) }}</div>
+            </div>  
+            <div id="Date-of-employment">
+                {{ form_label(searchWorkerForm.dateOfEmployment) }}
+                {{ form_errors(searchWorkerForm.dateOfEmployment) }}
+                    <div id="first-appointment">{{ form_widget(searchWorkerForm.dateOfEmployment) }}</div>
+            </div>    
+            <div>
+                {{ form_widget(searchWorkerForm.idWorker) }}                    
+            </div>                   
+            <div id="form-submit">
+                {{ form_widget(searchWorkerForm.edit) }}
+            </div>                  
+        </form>
+            {% endspaceless %}     
+        {% endblock form_row %}
+    </fieldset>
+  {% endif %}
+  {% if persisted is defined%}
+    <div>{{ persisted }}</div>
+  {% endif %}
+{% endblock %}
